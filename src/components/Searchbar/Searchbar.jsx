@@ -15,7 +15,10 @@ export const Searchbar = ({handlerSubmit}) => {
           keyword: '',
         }}
         validationSchema={schema}
-        onSubmit={values => handlerSubmit(values.keyword)}
+        onSubmit={(values, actions) => {
+          handlerSubmit(values.keyword);
+          actions.resetForm();
+        }}
       >
         <Form>
           <button type="submit">Submit</button>

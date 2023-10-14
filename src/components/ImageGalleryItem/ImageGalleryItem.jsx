@@ -6,25 +6,21 @@ export class ImageGalleryItem extends Component {
     isOpen: false,
   };
 
-  modalOpen = () => {
-    this.setState({
-      isOpen: true,
+  toggleModalOpen = () => {
+    this.setState(prevState => {
+      return {
+        isOpen: !prevState.isOpen,
+      };
     });
-  };
-
-  modalClose = () => {
-    this.setState({
-      isOpen: false,
-    });
-  };
+  }
 
   render() {
     const { url, src, alt } = this.props;
 
     return (
-      <button type="button" onClick={this.modalOpen}>
+      <button type="button" onClick={this.toggleModalOpen}>
         <img src={url} alt={alt} loading="lazy" />
-        <Modal src={src} alt={alt} isOpen={this.state.isOpen} handlerClose={this.modalClose} />
+        <Modal src={src} alt={alt} isOpen={this.state.isOpen} handlerClose={this.toggleModalOpen} />
       </button>
     );
   }

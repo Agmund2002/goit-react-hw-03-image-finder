@@ -5,6 +5,7 @@ import { Button } from './Button/Button';
 import { Loader } from './Loader/Loader';
 import { servicePhoto } from 'api/services';
 import { Notify } from 'notiflix';
+import { ErrorMessage } from './ErrorMessage/ErrorMessage';
 
 export class App extends Component {
   state = {
@@ -13,6 +14,7 @@ export class App extends Component {
     page: 1,
     loadMoreBtn: false,
     loader: false,
+    error: false
   };
 
   componentDidUpdate(_, prevState) {
@@ -33,12 +35,18 @@ export class App extends Component {
 
       const { hits, totalHits } = await servicePhoto(inputValue, page);
 
+      if (hits.length === 0) {
+        Notify.failure('Nothing could be found for this query');
+      }
+
       this.setState({
         images: [...this.state.images, ...hits],
         loadMoreBtn: this.state.page < Math.ceil(totalHits / 12),
       });
-    } catch (error) {
-      console.log(error);
+    } catch (_) {
+      this.setState({
+        error: true,
+      });
     } finally {
       this.setState({
         loader: false,
@@ -54,7 +62,9 @@ export class App extends Component {
         page: 1,
       });
     } else {
-      Notify.warning('You have not made any changes to the search string');
+      Notify.warning(
+        'The result of this query is already displayed in front of you'
+      );
     }
   };
 
@@ -67,7 +77,7 @@ export class App extends Component {
   };
 
   render() {
-    const { images, loadMoreBtn } = this.state;
+    const { images, loadMoreBtn, error } = this.state;
 
     return (
       <div>
@@ -75,6 +85,7 @@ export class App extends Component {
         {images.length > 0 && <ImageGallery data={this.state.images} />}
         {loadMoreBtn && <Button handlerClick={this.loadMore} />}
         <Loader visible={this.state.loader} />
+        {error && <ErrorMessage />}
       </div>
     );
   }

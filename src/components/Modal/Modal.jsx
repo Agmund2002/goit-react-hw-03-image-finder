@@ -1,4 +1,4 @@
-import ReactModal from "react-modal";
+import ReactModal from 'react-modal';
 
 ReactModal.setAppElement('#root');
 
@@ -18,9 +18,10 @@ export const Modal = ({ src, alt, isOpen, handlerClose }) => {
     <ReactModal
       isOpen={isOpen}
       onRequestClose={handlerClose}
+      shouldCloseOnOverlayClick={false}
       style={customStyles}
     >
-      <img src={src} alt={alt} />
+      <img src={src} alt={alt} width={850} />
     </ReactModal>
   );
 };
