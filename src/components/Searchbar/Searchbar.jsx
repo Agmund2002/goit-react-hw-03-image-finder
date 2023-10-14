@@ -1,4 +1,11 @@
-import { Formik, Field, Form } from 'formik';
+import { Formik, Field, Form, ErrorMessage } from 'formik';
+ import * as Yup from 'yup';
+
+ const schema = Yup.object().shape({
+   keyword: Yup.string()
+     .max(50, 'Too Long!')
+     .required('Required')
+ });
 
 export const Searchbar = ({handlerSubmit}) => {
   return (
@@ -7,6 +14,7 @@ export const Searchbar = ({handlerSubmit}) => {
         initialValues={{
           keyword: '',
         }}
+        validationSchema={schema}
         onSubmit={values => handlerSubmit(values.keyword)}
       >
         <Form>
@@ -19,6 +27,7 @@ export const Searchbar = ({handlerSubmit}) => {
             autoFocus
             placeholder="Search images and photos"
           />
+          <ErrorMessage name="keyword" />
         </Form>
       </Formik>
     </header>
