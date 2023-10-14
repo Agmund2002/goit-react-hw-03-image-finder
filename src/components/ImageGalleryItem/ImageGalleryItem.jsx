@@ -1,5 +1,6 @@
 import { Modal } from 'components/Modal/Modal';
 import { Component } from 'react';
+import { Img, ModalBtn } from './ImageGalleryItem.styled';
 
 export class ImageGalleryItem extends Component {
   state = {
@@ -18,10 +19,10 @@ export class ImageGalleryItem extends Component {
     const { url, src, alt } = this.props;
 
     return (
-      <button type="button" onClick={this.toggleModalOpen}>
-        <img src={url} alt={alt} loading="lazy" />
+      <ModalBtn type="button" onClick={this.toggleModalOpen}>
+        <Img src={url} alt={alt} loading="lazy" />
         <Modal src={src} alt={alt} isOpen={this.state.isOpen} handlerClose={this.toggleModalOpen} />
-      </button>
+      </ModalBtn>
     );
   }
 }

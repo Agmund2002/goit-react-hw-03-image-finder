@@ -1,5 +1,6 @@
-import { Formik, Field, Form, ErrorMessage } from 'formik';
+import { Formik } from 'formik';
  import * as Yup from 'yup';
+import { Error, FormStyled, Header, Icon, Input, SubmitBtn } from './Searchbar.styled';
 
  const schema = Yup.object().shape({
    keyword: Yup.string()
@@ -9,7 +10,7 @@ import { Formik, Field, Form, ErrorMessage } from 'formik';
 
 export const Searchbar = ({handlerSubmit}) => {
   return (
-    <header>
+    <Header>
       <Formik
         initialValues={{
           keyword: '',
@@ -20,19 +21,21 @@ export const Searchbar = ({handlerSubmit}) => {
           actions.resetForm();
         }}
       >
-        <Form>
-          <button type="submit">Submit</button>
+        <FormStyled>
+          <SubmitBtn type="submit">
+            <Icon />
+          </SubmitBtn>
 
-          <Field
+          <Input
             type="text"
             name="keyword"
             autoComplete="off"
             autoFocus
             placeholder="Search images and photos"
           />
-          <ErrorMessage name="keyword" />
-        </Form>
+          <Error component="span" name="keyword" />
+        </FormStyled>
       </Formik>
-    </header>
+    </Header>
   );
 };

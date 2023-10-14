@@ -5,7 +5,11 @@ import { ThemeProvider } from 'styled-components';
 import { GlobalStyle } from 'components/GlobalStyle';
 
 const theme = {
-  colors: {},
+  colors: {
+    mainBg: '#4354b0 ',
+    accent: '#d0d6db',
+    error: '#e60000',
+  },
   spacing: value => `${value * 4}px`,
   animation: '250ms cubic-bezier(0.4, 0, 0.2, 1);',
 };

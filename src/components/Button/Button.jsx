@@ -1,5 +1,11 @@
+import { FlexContainer, LoadMoreBtn } from "./Button.styled"
+
 export const Button = ({ handlerClick}) => {
     return (
-        <button type="button" onClick={handlerClick}>Load more</button>
-    )
+      <FlexContainer>
+        <LoadMoreBtn type="button" onClick={handlerClick}>
+          Load more
+        </LoadMoreBtn>
+      </FlexContainer>
+    );
 }

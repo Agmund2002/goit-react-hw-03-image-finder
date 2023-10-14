@@ -77,14 +77,14 @@ export class App extends Component {
   };
 
   render() {
-    const { images, loadMoreBtn, error } = this.state;
+    const { images, loadMoreBtn, error, loader } = this.state;
 
     return (
       <div>
         <Searchbar handlerSubmit={this.getInputValue} />
         {images.length > 0 && <ImageGallery data={this.state.images} />}
+        {loader && <Loader visible={this.state.loader} />}
         {loadMoreBtn && <Button handlerClick={this.loadMore} />}
-        <Loader visible={this.state.loader} />
         {error && <ErrorMessage />}
       </div>
     );

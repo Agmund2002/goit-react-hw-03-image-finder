@@ -1,13 +1,14 @@
 import { ImageGalleryItem } from "components/ImageGalleryItem/ImageGalleryItem"
+import { List, ListItem } from "./ImageGallery.styled"
 
 export const ImageGallery = ({data}) => {
     return (
-        <ul>
+        <List>
             {data.map(({id, webformatURL, largeImageURL, tags}) => (
-                <li key={id}>
+                <ListItem key={id}>
                     <ImageGalleryItem url={webformatURL} src={largeImageURL} alt={tags[0]} />
-                </li>
+                </ListItem>
             ))}
-        </ul>
+        </List>
     )
 }
